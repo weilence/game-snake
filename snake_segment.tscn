@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmrlr77taw30i"]
+
+[ext_resource type="Script" uid="uid://cwi0ebeh7pkeg" path="res://snake_segment.gd" id="1_n700c"]
+
+[node name="ColorRect" type="ColorRect"]
+script = ExtResource("1_n700c")

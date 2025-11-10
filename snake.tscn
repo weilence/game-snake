@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://g0oetsoqc1w1"]
+
+[ext_resource type="Script" uid="uid://c8u2iqou6jcfd" path="res://snake.gd" id="1_gxkgb"]
+[ext_resource type="Script" uid="uid://dpmjroy7mggil" path="res://circle.gd" id="2_gxkgb"]
+[ext_resource type="PackedScene" uid="uid://cmrlr77taw30i" path="res://snake_segment.tscn" id="4_olj5u"]
+
+[node name="Snake" type="Node2D"]
+z_index = 1
+script = ExtResource("1_gxkgb")
+
+[node name="SnakeHead" type="Node2D" parent="."]
+
+[node name="Circle" type="Node2D" parent="SnakeHead"]
+script = ExtResource("2_gxkgb")
+circle_color = Color(1, 1, 1, 1)
+
+[node name="SnakeBody" type="Node2D" parent="."]
+
+[node name="SnakeSegment" parent="SnakeBody" instance=ExtResource("4_olj5u")]
+metadata/_edit_use_anchors_ = true

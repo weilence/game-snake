@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2rehootvkyww"]
+
+[ext_resource type="Script" uid="uid://cboil5kiron5i" path="res://hud.gd" id="1_37p78"]
+
+[sub_resource type="Theme" id="Theme_n2snw"]
+default_font_size = 26
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_37p78")
+
+[node name="ScoreContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_n2snw")
+
+[node name="ScoreLabel" type="Label" parent="ScoreContainer"]
+layout_mode = 2
+text = "Score:"
+
+[node name="ScoreValueLabel" type="Label" parent="ScoreContainer"]
+layout_mode = 2
+text = "0"
