@@ -9,7 +9,8 @@ default_font_size = 26
 script = ExtResource("1_37p78")
 
 [node name="ScoreContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
+visible = false
+offset_right = 95.0
 offset_bottom = 40.0
 theme = SubResource("Theme_n2snw")
 
@@ -20,3 +21,13 @@ text = "Score:"
 [node name="ScoreValueLabel" type="Label" parent="ScoreContainer"]
 layout_mode = 2
 text = "0"
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 507.0
+offset_top = 303.0
+offset_right = 645.0
+offset_bottom = 345.0
+theme_override_font_sizes/font_size = 24
+text = "Start Game"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

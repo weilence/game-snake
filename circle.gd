@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 @export var circle_color: Color = Color(0, 0, 0)

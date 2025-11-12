@@ -1,13 +1,17 @@
 extends CanvasLayer
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+signal start_game
 
 func _on_game_manager_score_changed(new_score: int) -> void:
 	$ScoreContainer/ScoreValueLabel.text = str(new_score)
+
+
+func _on_start_button_pressed() -> void:
+	$StartButton.hide()
+	$ScoreContainer.show()
+	emit_signal("start_game")
+
+
+func _on_game_manager_game_over() -> void:
+	$StartButton.show()
+	$ScoreContainer.hide()

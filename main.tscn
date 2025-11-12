@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgps7xkn4pmri"]
+[gd_scene load_steps=3 format=3 uid="uid://cgps7xkn4pmri"]
 
-[ext_resource type="PackedScene" uid="uid://g0oetsoqc1w1" path="res://snake.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://b8fsmic1qyh4b" path="res://global_manager.gd" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://b2rehootvkyww" path="res://hud.tscn" id="3_lquwl"]
 
@@ -13,11 +12,7 @@ script = ExtResource("2_1bvp3")
 
 [node name="HUD" parent="." instance=ExtResource("3_lquwl")]
 
-[node name="Snake" parent="." instance=ExtResource("1_ig7tw")]
-
-[connection signal="grow_snake" from="GameManager" to="Snake" method="_on_game_manager_grow_snake"]
-[connection signal="score_changed" from="GameManager" to="Snake" method="_on_game_manager_score_changed"]
+[connection signal="game_over" from="GameManager" to="HUD" method="_on_game_manager_game_over"]
 [connection signal="score_changed" from="GameManager" to="HUD" method="_on_game_manager_score_changed"]
 [connection signal="timeout" from="GameManager/AppleSpawnTimer" to="GameManager" method="_on_apple_spawn_timer_timeout"]
-[connection signal="die" from="Snake" to="GameManager" method="game_over"]
-[connection signal="move_to" from="Snake" to="GameManager" method="_on_snake_move_to"]
+[connection signal="start_game" from="HUD" to="GameManager" method="start_game"]

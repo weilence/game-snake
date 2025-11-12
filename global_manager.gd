@@ -1,30 +1,37 @@
 extends Node
 
 var APPLE_SCENE = preload("res://apple.tscn")
+var SNAKE_SCENE = preload("res://snake.tscn")
 
 var score: int = 0
 var apples: Array[Vector2] = []
 signal score_changed(new_score: int)
-signal grow_snake()
-
-func _ready():
-	start_game()
+signal game_over
 
 func start_game() -> void:
 	score = 0
 	apples.clear()
 	emit_signal("score_changed", score)
 	$AppleSpawnTimer.start()
+	create_snake()
 
-func game_over() -> void:
+func stop_game() -> void:
+	$Snake.queue_free()
 	$AppleSpawnTimer.stop()
+	for apple_node in get_tree().get_nodes_in_group("apple"):
+		apple_node.queue_free()
+	apples.clear()
+	emit_signal("game_over")
 	print("Game Over! Final Score: ", score)
-	get_tree().quit()
+
+func create_snake() -> void:
+	var snake_node: Snake = SNAKE_SCENE.instantiate()
+	snake_node.connect("move_to", _on_snake_move_to)
+	snake_node.connect("die", stop_game)
+	connect("score_changed", snake_node._on_game_manager_score_changed)
+	add_child(snake_node)
 
 func _on_snake_move_to(pos: Vector2) -> void:
-	if pos.x < 0 || pos.x >= Global.size.x || pos.y < 0 || pos.y >= Global.size.y:
-		game_over()
-
 	var apple_index = apples.find(pos)
 	if apple_index != -1:
 		apples.remove_at(apple_index)
@@ -32,7 +39,7 @@ func _on_snake_move_to(pos: Vector2) -> void:
 		score += apple_node.score
 		apple_node.queue_free()
 		emit_signal("score_changed", score)
-		emit_signal("grow_snake")
+		$Snake.grow()
 
 
 func _on_apple_spawn_timer_timeout() -> void:
